@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .profile-card {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .profile-card h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .info {
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .info span {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .logout-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .logout-btn:hover {
+            background: #c9302c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-card">
+    <h2 th:text="${user.name} + ' Profile'">User Profile</h2>
+
+    <div class="info">
+        <p><span>ID:</span> <span th:text="${user.id}">1</span></p>
+        <p><span>Name:</span> <span th:text="${user.name}">Akash</span></p>
+        <p><span>Email:</span> <span th:text="${user.email}">akash@example.com</span></p>
+        <p><span>Mobile:</span> <span th:text="${user.mobile}">9876543210</span></p>
+        <p><span>Password:</span> <span th:text="${user.password}">******</span></p>
+        <p><span>Gender:</span> <span th:text="${user.gender}">Male</span></p>
+    </div>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+</body>
+</html>
