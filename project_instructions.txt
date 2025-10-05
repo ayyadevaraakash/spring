@@ -1,0 +1,36 @@
+Spring + Plain JDBC + JDBCTemplate/NamedParameterJDBCTemplate
+
+1. Spring Config File with two methods - configuring data source (old days) + jdbc Template (or named)
+2. applicationContext.xml - CONTEXT schema + component scan
+
+======================================
+Spring + Hibernate
+
+1. Hibernate config file (/com/tcs/config/hibernate.cfg.xml)
+2. HibernateUtil (to ensure SessionFactory should be created only once)
+3. @Entity, @Table for student class + @Id auto for hibernate
+
+======================================
+Spring Web MVC (Confusing - NO Database)
+
+1. webapp - {WEB-INF, index.jsp} - {views, myds-servlet.xml, web.xml} - {loginPage.jsp, profile.jsp}
+2. web.xml -> servlet mapping only for DispatcherServlet (front controller)
+3. myds-servlet.xml -> context schema + bean creation (RequestMappingHandlerMapping + InternalResourceViewResolver)
+4. RequestMappingHandlerMapping - Bean for Request Mapper (modern days it will automatically take to controller @GetMapping)
+5. InternalResourceViewResolver - Give full path of views, prefix and suffix to provide, prefix is related to webapp folder ("/WEB-INF/views/")
+
+======================================
+MVC + Servlet Model
+
+1. webapp -> all .jsp pages
+2. old days db connection, driverManager and sql queries in DAO
+
+======================================
+Spring Boot + JPA (Hibernate)
+
+1. application.properties - put all DB connection + hibernate config
+2. templates folder - all thymeleaf .html files for UI
+3. Create own interface Repository (UserRepo) which will extend JPARepository
+4. Entity will have @Entity, @Table and @Id because JPA is using hibernate internally
+5. Service File and Controller File should be there
+6. Controller will call service file and inside service file we will use UserRepo methods and insert data

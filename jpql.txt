@@ -1,0 +1,50 @@
+JPA Methods without touch UserRepository
+
+1. save(T)
+2. findById(T)
+3. findAll()
+4. deleteById(T)
+5. deleteAll()
+
+If you want some specific in-depth query, we can write it manually
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer> {
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.name = :name, u.email = :email WHERE u.id = :id")
+    int updateUserById(Integer id, String name, String email);
+}
+
+@Modifying and @Transactional (UPDATE, DELETE, INSERT)
+
+======================
+JPQL (Java Persistence Query Language)
+
+READ:
+@Query("SELECT u FROM User u")
+
+SELECT:
+@Query("SELECT u FROM User u WHERE u.id = :id")
+User findById(@Param("id") Integer id);
+
+@Query("SELECT u FROM User u WHERE u.email = :email")
+User findByEmail(@Param("email") String email);
+
+UPDATE:
+@Modifying
+@Transactional
+@Query("UPDATE User u SET u.name = :name, u.email = :email WHERE u.id = :id")
+int updateUserById(@Param("id") Integer id, @Param("name") String name, @Param("email") String email);
+
+DELETE:
+@Modifying
+@Transactional
+@Query("DELETE FROM User u WHERE u.id = :id")
+int deleteUserById(@Param("id") Integer id);
+
+
+WE CAN OMIT @Param if parameter name is same as :dynamic_parameter
+@Query("SELECT u FROM User u WHERE u.id = :userId")
+User findByUserId(@Param("userId") Integer id);
